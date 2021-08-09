@@ -1,0 +1,32 @@
+
+ SQL language : 
+
+/***********************************************************************************************************/
+
+CREATE TABLE Customer (
+	Customer_id VARCHAR2(20) CONSTRAINT pk_Customer PRIMARY KEY,
+	Customer_Name VARCHAR2(20) CONSTRAINT cust_null NOT NULL,
+	Customer_Tel NUMBER
+);
+
+CREATE TABLE Product (
+	Product_id VARCHAR2(20) CONSTRAINT pk_Product PRIMARY KEY,
+	Product_name VARCHAR2(20) CONSTRAINT prod_null NOT NULL,
+	Price NUMBER CONSTRAINT price_checker CHECK (Price > 0)
+);
+
+CREATE TABLE Orders ( 
+           Customer_id VARCHAR2(20),
+           Product_id VARCHAR2(20),
+           Quantity NUMBER,
+           Toatal_amount NUMBER,
+           CONSTRAINT fk1_Orders FOREIGN KEY (Product_id) REFERENCES Product(Product_id),   
+           CONSTRAINT fk2_Orders FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) 
+);
+
+
+ALTER TABLE Product ADD Category VARCHAR2(20);
+ALTER TABLE Orders ADD OrderDate Date DEFAULT SYSDATE;
+
+
+/***********************************************************************************************************/
